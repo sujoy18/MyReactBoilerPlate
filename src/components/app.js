@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 const ToDo = ({toDoItem}) => {
     return (
         <div>
@@ -9,8 +9,25 @@ const ToDo = ({toDoItem}) => {
     )
 }
 
+function ToDoForm(addTodo){
+    cosnt [value,setItem]=useState("");
+
+    const hadnleSubmit=e=>{
+        e.preventDefault();
+        addTodo(value)
+        setItem("");
+    };
+    const handleChange=e=>{
+        useState(e.target.value);
+    }
+    return (<form onSubmit={hadnleSubmit} >
+        <input type="text" onChange={handleChange}></input>
+    </form>);
+}
+
+
 function App() {
-    const myToDos = [
+    const [myToDos,setTodo] =useState( [
         {
             item: "Check mail",
             isCompleted: true
@@ -24,7 +41,11 @@ function App() {
             item: "Learn about react",
             isCompleted: false
         }
-    ];
+    ]);
+    const addTodo =item=>{
+        const newTodos= [...myToDos,{item,isCompleted:false}];
+        useState(newTodos);
+    }
     const renderTodo = myToDos.map((todo, index) => (< ToDo toDoItem = {
         todo
     } />));
@@ -32,6 +53,7 @@ function App() {
     return (
         <div>
             {renderTodo}
+            <ToDoForm addTodo={addTodo}></ToDoForm>
         </div>
     )
 }
