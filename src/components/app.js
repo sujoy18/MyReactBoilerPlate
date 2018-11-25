@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const ToDo = ({toDoItem}) => {
     return (
@@ -56,6 +56,8 @@ function App() {
         ];
         setTodo(newTodos);
     }
+
+    const handle
     const renderTodo = myToDos.map((todo, index) => (< ToDo toDoItem = {
         todo
     } />));
