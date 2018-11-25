@@ -5,7 +5,7 @@ module.exports = {
 				entry: {
 								main: './src/index.js'
 				},
-
+				devtool: "source-map",
 				output: {
 								filename: '[name].[hash].js',
 								path: path.resolve('./dist')

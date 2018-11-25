@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
+
 const ToDo = ({toDoItem}) => {
     return (
         <div>
@@ -9,25 +10,28 @@ const ToDo = ({toDoItem}) => {
     )
 }
 
-function ToDoForm(addTodo){
-    cosnt [value,setItem]=useState("");
+function ToDoForm({addItem}) {
+    const [value,
+        setItem] = useState("");
 
-    const hadnleSubmit=e=>{
+    const hadnleSubmit = e => {
         e.preventDefault();
-        addTodo(value)
+        addItem(value);
         setItem("");
     };
-    const handleChange=e=>{
-        useState(e.target.value);
+    const handleChange = e => {
+        setItem(e.target.value);
     }
-    return (<form onSubmit={hadnleSubmit} >
-        <input type="text" onChange={handleChange}></input>
-    </form>);
+    return (
+        <form onSubmit={hadnleSubmit}>
+            <input type="text" value={value} onChange={handleChange}></input>
+        </form>
+    );
 }
 
-
 function App() {
-    const [myToDos,setTodo] =useState( [
+    const [myToDos,
+        setTodo] = useState([
         {
             item: "Check mail",
             isCompleted: true
@@ -42,9 +46,15 @@ function App() {
             isCompleted: false
         }
     ]);
-    const addTodo =item=>{
-        const newTodos= [...myToDos,{item,isCompleted:false}];
-        useState(newTodos);
+
+    const addTodo = item => {
+        const newTodos = [
+            ...myToDos, {
+                item,
+                isCompleted: false
+            }
+        ];
+        setTodo(newTodos);
     }
     const renderTodo = myToDos.map((todo, index) => (< ToDo toDoItem = {
         todo
@@ -53,7 +63,7 @@ function App() {
     return (
         <div>
             {renderTodo}
-            <ToDoForm addTodo={addTodo}></ToDoForm>
+            <ToDoForm addItem={addTodo}></ToDoForm>
         </div>
     )
 }
